@@ -1,4 +1,4 @@
-package com.manageway.web.dtos;
+package com.manageway.web.controller.dtos;
 
 import com.manageway.domain.project.Project;
 

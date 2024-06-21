@@ -1,4 +1,4 @@
-package com.manageway.repository;
+package com.manageway.domain.repository;
 
 import com.manageway.domain.Id;
 import com.manageway.domain.PersistenceEntity;
@@ -10,7 +10,7 @@ public interface BaseRepository<T extends PersistenceEntity> {
 
     void update(T entity);
 
-    T findById(Id id);
+    T find(Id id);
 
     void delete(T entity);
 }

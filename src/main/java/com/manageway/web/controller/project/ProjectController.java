@@ -1,13 +1,12 @@
-package com.manageway.web.project;
+package com.manageway.web.controller.project;
 
+import com.manageway.domain.Id;
 import com.manageway.usecase.project.CreateProjectUseCase;
 import com.manageway.usecase.project.FindProjectUseCase;
-import com.manageway.web.dtos.CreateProjectRequest;
-import com.manageway.web.dtos.CreateProjectResponse;
-import com.manageway.web.dtos.FindProjectResponse;
+import com.manageway.web.controller.dtos.CreateProjectRequest;
+import com.manageway.web.controller.dtos.CreateProjectResponse;
+import com.manageway.web.controller.dtos.FindProjectResponse;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("projects")
@@ -25,8 +24,8 @@ public class ProjectController {
         return createProjectUseCase.create(request);
     }
 
-    @GetMapping
-    public FindProjectResponse find(@RequestParam Map<String, String> params) {
-        return findProjectUseCase.find(params);
+    @GetMapping("/{id}")
+    public FindProjectResponse find(@PathVariable("id") Id id) {
+        return new FindProjectResponse().fromProject(findProjectUseCase.find(id));
     }
 }
