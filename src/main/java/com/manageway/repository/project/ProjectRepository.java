@@ -1,5 +1,6 @@
 package com.manageway.repository.project;
 
+import com.manageway.StaticUtils;
 import com.manageway.domain.Id;
 import com.manageway.domain.project.Project;
 import com.manageway.repository.BaseRepository;
@@ -77,7 +78,7 @@ public class ProjectRepository implements BaseRepository<Project> {
             String key = entry.getKey();
             Object value = entry.getValue();
 
-            Field<Object> field = PROJECT.field(key, Object.class);
+            Field<Object> field = PROJECT.field(StaticUtils.toSnakeCase(key), Object.class);
             if (field != null && value != null) {
                 conditions.add(field.eq(value));
             }
