@@ -1,16 +1,18 @@
 package com.manageway.config;
 
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DefaultDSLContext;
+import com.manageway.domain.ApplicationContext;
+import org.jooq.*;
+import org.jooq.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
+import static com.manageway.domain.TenantId.TENANT_ID;
+
 
 @Configuration
-public class JooqConfiguration {
+public class JooqConfiguration{
 
     private final DataSource dataSource;
 
@@ -20,7 +22,12 @@ public class JooqConfiguration {
 
     @Bean
     public DSLContext dslContext() {
-        return new DefaultDSLContext(dataSource, SQLDialect.POSTGRES);
-    }
+        DefaultConfiguration configuration = new DefaultConfiguration();
+        configuration.setSQLDialect(SQLDialect.POSTGRES);
+        configuration.setDataSource(dataSource);
+        configuration.set(new DefaultVisitListenerProvider(new TenantIdVisitListener()));
 
+        return DSL.using(configuration);
+        //return new DefaultDSLContext(dataSource, SQLDialect.POSTGRES);
+    }
 }

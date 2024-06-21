@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rafael-bortoli
+      changes:
+        - createTable:
+            tableName: project
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: TIMESTAMP
+              - column:
+                  name: employee_id
+                  type: UUID
+              - column:
+                  name: customer_id
+                  type: UUID
+              - column:
+                  name: total_price
+                  type: DECIMAL(10, 2)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: tenant_id
+                  type: UUID
+
+  - changeSet:
+      id: 2
+      author: rafael-bortoli
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: project
+            baseColumnNames: employee_id
+            constraintName: fk_project_employee
+            referencedTableName: employee
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: project
+            baseColumnNames: customer_id
+            constraintName: fk_project_customer
+            referencedTableName: customer
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 3
+      author: rafael-bortoli
+      changes:
+        - createIndex:
+            indexName: idx_project_tenant_id
+            tableName: project
+            columns:
+              - column:
+                  name: tenant_id

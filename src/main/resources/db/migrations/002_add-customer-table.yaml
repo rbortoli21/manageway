@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rafael-bortoli
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: TIMESTAMP
+              - column:
+                  name: address_id
+                  type: UUID
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: tenant_id
+                  type: UUID
+
+  - changeSet:
+      id: 2
+      author: rafael-bortoli
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: customer
+            baseColumnNames: address_id
+            constraintName: fk_customer_address
+            referencedTableName: address
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 3
+      author: rafael-bortoli
+      changes:
+        - createIndex:
+            indexName: idx_customer_tenant_id
+            tableName: customer
+            columns:
+              - column:
+                  name: tenant_id
