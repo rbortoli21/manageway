@@ -1,7 +1,7 @@
 package com.manageway.usecase.project;
 
 import com.manageway.domain.project.Project;
-import com.manageway.repository.project.ProjectRepository;
+import com.manageway.repository.interfaces.BaseRepository;
 import com.manageway.usecase.customer.FindCustomerUseCase;
 import com.manageway.usecase.employee.FindEmployeeUseCase;
 import com.manageway.web.controller.project.dtos.CreateProjectRequest;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateProjectUseCase {
 
-    private final ProjectRepository projectRepository;
+    private final BaseRepository<Project> projectRepository;
     private final FindEmployeeUseCase findEmployeeUseCase;
     private final FindCustomerUseCase findCustomerUseCase;
 
-    public CreateProjectUseCase(ProjectRepository projectRepository,
+    public CreateProjectUseCase(BaseRepository<Project> projectRepository,
                                 FindEmployeeUseCase findEmployeeUseCase,
                                 FindCustomerUseCase findCustomerUseCase) {
         this.projectRepository = projectRepository;

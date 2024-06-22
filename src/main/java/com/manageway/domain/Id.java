@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 
 public record Id(@JsonValue UUID value) {
+    public static final String ID = "id";
+
     public Id() {
         this(null);
     }

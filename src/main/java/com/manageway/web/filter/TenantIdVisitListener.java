@@ -11,6 +11,8 @@ import static com.manageway.domain.TenantId.TENANT_ID;
 
 public class TenantIdVisitListener implements VisitListener {
 
+    private static final ThreadLocal<Boolean> conditionAdded = ThreadLocal.withInitial(() -> false);
+
     @Override
     public void clauseStart(VisitContext context) {
         ApplicationContext applicationContext = ApplicationContext.getInstance();
@@ -18,9 +20,12 @@ public class TenantIdVisitListener implements VisitListener {
             return;
 
         if (context.queryPart() instanceof SelectQuery<?> selectQuery) {
-            Condition condition = DSL.field(TENANT_ID).eq(applicationContext.getTenantId().value());
+            if (!conditionAdded.get()) {
+                Condition condition = DSL.field(TENANT_ID).eq(applicationContext.getTenantId().value());
 
-            selectQuery.addConditions(condition);
+                selectQuery.addConditions(condition);
+                conditionAdded.set(true);
+            }
         }
     }
 

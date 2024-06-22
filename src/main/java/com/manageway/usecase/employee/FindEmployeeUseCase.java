@@ -2,7 +2,7 @@ package com.manageway.usecase.employee;
 
 import com.manageway.domain.Id;
 import com.manageway.domain.employee.Employee;
-import com.manageway.repository.employee.EmployeeRepository;
+import com.manageway.repository.interfaces.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 @Service

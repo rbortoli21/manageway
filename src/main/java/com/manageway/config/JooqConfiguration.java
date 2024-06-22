@@ -27,8 +27,6 @@ public class JooqConfiguration {
         configuration.setSQLDialect(SQLDialect.POSTGRES);
         configuration.setDataSource(dataSource);
         configuration.set(new DefaultVisitListenerProvider(new TenantIdVisitListener()));
-
         return DSL.using(configuration);
-        //return new DefaultDSLContext(dataSource, SQLDialect.POSTGRES);
     }
 }
