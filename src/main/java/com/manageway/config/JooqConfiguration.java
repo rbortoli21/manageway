@@ -1,18 +1,19 @@
 package com.manageway.config;
 
-import com.manageway.domain.ApplicationContext;
-import org.jooq.*;
-import org.jooq.impl.*;
+import com.manageway.web.filter.TenantIdVisitListener;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
+import org.jooq.impl.DefaultConfiguration;
+import org.jooq.impl.DefaultVisitListenerProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-import static com.manageway.domain.TenantId.TENANT_ID;
-
 
 @Configuration
-public class JooqConfiguration{
+public class JooqConfiguration {
 
     private final DataSource dataSource;
 

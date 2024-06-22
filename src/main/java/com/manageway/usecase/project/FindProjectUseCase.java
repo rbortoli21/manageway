@@ -2,8 +2,8 @@ package com.manageway.usecase.project;
 
 import com.manageway.domain.Id;
 import com.manageway.domain.project.Project;
-import com.manageway.domain.repository.project.ProjectRepository;
-import com.manageway.impl.repository.project.ProjectRepositoryImpl;
+import com.manageway.repository.impl.project.ProjectRepositoryImpl;
+import com.manageway.repository.project.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 @Service

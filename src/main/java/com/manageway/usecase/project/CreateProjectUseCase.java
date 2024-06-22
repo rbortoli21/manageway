@@ -1,11 +1,11 @@
 package com.manageway.usecase.project;
 
 import com.manageway.domain.project.Project;
-import com.manageway.domain.repository.project.ProjectRepository;
+import com.manageway.repository.project.ProjectRepository;
 import com.manageway.usecase.customer.FindCustomerUseCase;
 import com.manageway.usecase.employee.FindEmployeeUseCase;
-import com.manageway.web.controller.dtos.CreateProjectRequest;
-import com.manageway.web.controller.dtos.CreateProjectResponse;
+import com.manageway.web.controller.project.dtos.CreateProjectRequest;
+import com.manageway.web.controller.project.dtos.CreateProjectResponse;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 

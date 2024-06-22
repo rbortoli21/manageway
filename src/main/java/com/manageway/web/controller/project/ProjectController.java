@@ -3,9 +3,9 @@ package com.manageway.web.controller.project;
 import com.manageway.domain.Id;
 import com.manageway.usecase.project.CreateProjectUseCase;
 import com.manageway.usecase.project.FindProjectUseCase;
-import com.manageway.web.controller.dtos.CreateProjectRequest;
-import com.manageway.web.controller.dtos.CreateProjectResponse;
-import com.manageway.web.controller.dtos.FindProjectResponse;
+import com.manageway.web.controller.project.dtos.CreateProjectRequest;
+import com.manageway.web.controller.project.dtos.CreateProjectResponse;
+import com.manageway.web.controller.project.dtos.FindProjectResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

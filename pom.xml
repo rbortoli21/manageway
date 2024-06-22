@@ -41,13 +41,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Liquibase -->
-
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-        </dependency>
-
         <!-- Jooq -->
 
         <dependency>
@@ -100,7 +93,7 @@
                             <excludes>databasechangelog|databasechangeloglock</excludes>
                         </database>
                         <target>
-                            <packageName>com.manageway.jooq</packageName>
+                            <packageName>com.manageway.generated.jooq</packageName>
                             <directory>src/main/java</directory>
                         </target>
                     </generator>
@@ -109,6 +102,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.3.5</version>
+                <configuration>
+                    <propertyFile>liquibase.properties</propertyFile>
+                    <changeLogFile>src/main/resources/db/db-changelog.yaml</changeLogFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>

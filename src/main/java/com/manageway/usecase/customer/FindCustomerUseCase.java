@@ -2,7 +2,7 @@ package com.manageway.usecase.customer;
 
 import com.manageway.domain.Id;
 import com.manageway.domain.customer.Customer;
-import com.manageway.domain.repository.customer.CustomerRepository;
+import com.manageway.repository.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
