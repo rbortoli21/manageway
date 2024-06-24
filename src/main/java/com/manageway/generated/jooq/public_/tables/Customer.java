@@ -107,6 +107,21 @@ public class Customer extends TableImpl<CustomerRecord> {
      */
     public final TableField<CustomerRecord, UUID> TENANT_ID = createField(DSL.name("tenant_id"), SQLDataType.UUID, this, "");
 
+    /**
+     * The column <code>public.customer.username</code>.
+     */
+    public final TableField<CustomerRecord, String> USERNAME = createField(DSL.name("username"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>public.customer.password</code>.
+     */
+    public final TableField<CustomerRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>public.customer.role</code>.
+     */
+    public final TableField<CustomerRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+
     private Customer(Name alias, Table<CustomerRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }

@@ -42,19 +42,23 @@ public class Unnest extends TableImpl<UnnestRecord> {
     }
 
     /**
-     * @deprecated Unknown data type. If this is a qualified, user-defined type,
-     * it may have been excluded from code generation. If this is a built-in
-     * type, you can define an explicit {@link org.jooq.Binding} to specify how
-     * this type should be handled. Deprecation can be turned off using
-     * {@literal <deprecationOnUnknownTypes/>} in your code generator
-     * configuration.
+     * The column <code>pg_catalog.unnest.lexeme</code>.
      */
-    @Deprecated
-    public final TableField<UnnestRecord, Object> UNNEST_ = createField(DSL.name("unnest"), DefaultDataType.getDefaultDataType("\"anyelement\""), this, "");
+    public final TableField<UnnestRecord, String> LEXEME = createField(DSL.name("lexeme"), SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>pg_catalog.unnest.positions</code>.
+     */
+    public final TableField<UnnestRecord, Short[]> POSITIONS = createField(DSL.name("positions"), SQLDataType.SMALLINT.array(), this, "");
+
+    /**
+     * The column <code>pg_catalog.unnest.weights</code>.
+     */
+    public final TableField<UnnestRecord, String[]> WEIGHTS = createField(DSL.name("weights"), SQLDataType.CLOB.array(), this, "");
 
     private Unnest(Name alias, Table<UnnestRecord> aliased) {
         this(alias, aliased, new Field[] {
-            DSL.val(null, SQLDataType.OTHER.array())
+            DSL.val(null, DefaultDataType.getDefaultDataType("\"pg_catalog\".\"tsvector\""))
         });
     }
 
@@ -135,10 +139,10 @@ public class Unnest extends TableImpl<UnnestRecord> {
      * Call this table-valued function
      */
     public Unnest call(
-          Object[] __1
+          Object tsvector
     ) {
         Unnest result = new Unnest(DSL.name("unnest"), null, new Field[] {
-            DSL.val(__1, SQLDataType.OTHER.array())
+            DSL.val(tsvector, DefaultDataType.getDefaultDataType("\"pg_catalog\".\"tsvector\""))
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;
@@ -148,10 +152,10 @@ public class Unnest extends TableImpl<UnnestRecord> {
      * Call this table-valued function
      */
     public Unnest call(
-          Field<Object[]> __1
+          Field<Object> tsvector
     ) {
         Unnest result = new Unnest(DSL.name("unnest"), null, new Field[] {
-            __1
+            tsvector
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;

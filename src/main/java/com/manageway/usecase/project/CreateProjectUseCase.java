@@ -6,8 +6,12 @@ import com.manageway.usecase.customer.FindCustomerUseCase;
 import com.manageway.usecase.employee.FindEmployeeUseCase;
 import com.manageway.web.controller.project.dtos.CreateProjectRequest;
 import com.manageway.web.controller.project.dtos.CreateProjectResponse;
-import jakarta.validation.Valid;
+import com.manageway.web.exception.ManagewayValidationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.text.MessageFormat;
+import java.util.Optional;
 
 @Service
 public class CreateProjectUseCase {
@@ -24,19 +28,23 @@ public class CreateProjectUseCase {
         this.findCustomerUseCase = findCustomerUseCase;
     }
 
-    public CreateProjectResponse create(@Valid CreateProjectRequest request) {
-        try {
-            Project project = request.toProject();
+    public CreateProjectResponse create(CreateProjectRequest request) {
+        Project project = request.toProject();
 
-            //Optional.ofNullable(findEmployeeUseCase.find(project.getEmployee())).orElseThrow();
-            //Optional.ofNullable(findCustomerUseCase.find(project.getCustomer())).orElseThrow();
+        project.setCustomer(findCustomerUseCase.find(request.customerId()));
+        project.setEmployee(findEmployeeUseCase.find(request.employeeId()));
 
-            project = projectRepository.save(project);
-            return new CreateProjectResponse(true, "Project created successfully", project);
-        } catch (Exception e) {
-            return new CreateProjectResponse(false, "Failed to create project - " + e.getMessage(), null);
-        }
+        String notFoundMessage = "{0} was not found in the database.";
+        Optional.ofNullable(project.getEmployee()).orElseThrow(
+                () -> new ManagewayValidationException(HttpStatus.BAD_REQUEST,
+                        MessageFormat.format(notFoundMessage, "Employee"))
+        );
+        Optional.ofNullable(project.getCustomer()).orElseThrow(
+                () -> new ManagewayValidationException(HttpStatus.BAD_REQUEST,
+                        MessageFormat.format(notFoundMessage, "Customer"))
+        );
 
-
+        project = projectRepository.save(project);
+        return new CreateProjectResponse(true, "Project created successfully", project);
     }
 }

@@ -18,29 +18,45 @@ public class UnnestRecord extends TableRecordImpl<UnnestRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @deprecated Unknown data type. If this is a qualified, user-defined type,
-     * it may have been excluded from code generation. If this is a built-in
-     * type, you can define an explicit {@link org.jooq.Binding} to specify how
-     * this type should be handled. Deprecation can be turned off using
-     * {@literal <deprecationOnUnknownTypes/>} in your code generator
-     * configuration.
+     * Setter for <code>pg_catalog.unnest.lexeme</code>.
      */
-    @Deprecated
-    public void setUnnest(Object value) {
+    public void setLexeme(String value) {
         set(0, value);
     }
 
     /**
-     * @deprecated Unknown data type. If this is a qualified, user-defined type,
-     * it may have been excluded from code generation. If this is a built-in
-     * type, you can define an explicit {@link org.jooq.Binding} to specify how
-     * this type should be handled. Deprecation can be turned off using
-     * {@literal <deprecationOnUnknownTypes/>} in your code generator
-     * configuration.
+     * Getter for <code>pg_catalog.unnest.lexeme</code>.
      */
-    @Deprecated
-    public Object getUnnest() {
-        return get(0);
+    public String getLexeme() {
+        return (String) get(0);
+    }
+
+    /**
+     * Setter for <code>pg_catalog.unnest.positions</code>.
+     */
+    public void setPositions(Short[] value) {
+        set(1, value);
+    }
+
+    /**
+     * Getter for <code>pg_catalog.unnest.positions</code>.
+     */
+    public Short[] getPositions() {
+        return (Short[]) get(1);
+    }
+
+    /**
+     * Setter for <code>pg_catalog.unnest.weights</code>.
+     */
+    public void setWeights(String[] value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>pg_catalog.unnest.weights</code>.
+     */
+    public String[] getWeights() {
+        return (String[]) get(2);
     }
 
     // -------------------------------------------------------------------------
@@ -57,10 +73,12 @@ public class UnnestRecord extends TableRecordImpl<UnnestRecord> {
     /**
      * Create a detached, initialised UnnestRecord
      */
-    public UnnestRecord(Object unnest) {
+    public UnnestRecord(String lexeme, Short[] positions, String[] weights) {
         super(Unnest.UNNEST);
 
-        setUnnest(unnest);
+        setLexeme(lexeme);
+        setPositions(positions);
+        setWeights(weights);
         resetChangedOnNotNull();
     }
 }

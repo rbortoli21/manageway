@@ -7,10 +7,17 @@ package com.manageway.generated.jooq.pg_catalog.tables;
 import com.manageway.generated.jooq.pg_catalog.PgCatalog;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgTimezoneAbbrevsRecord;
 
+import java.util.Collection;
+
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Name;
+import org.jooq.PlainSQL;
+import org.jooq.QueryPart;
+import org.jooq.SQL;
 import org.jooq.Schema;
+import org.jooq.Select;
+import org.jooq.Stringly;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -57,16 +64,16 @@ public class PgTimezoneAbbrevs extends TableImpl<PgTimezoneAbbrevsRecord> {
     public final TableField<PgTimezoneAbbrevsRecord, Boolean> IS_DST = createField(DSL.name("is_dst"), SQLDataType.BOOLEAN, this, "");
 
     private PgTimezoneAbbrevs(Name alias, Table<PgTimezoneAbbrevsRecord> aliased) {
-        this(alias, aliased, new Field[] {
-        });
-    }
-
-    private PgTimezoneAbbrevs(Name alias, Table<PgTimezoneAbbrevsRecord> aliased, Field<?>[] parameters) {
-        this(alias, aliased, parameters, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
     private PgTimezoneAbbrevs(Name alias, Table<PgTimezoneAbbrevsRecord> aliased, Field<?>[] parameters, Condition where) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.function(), where);
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
+        create view "pg_timezone_abbrevs" as  SELECT abbrev,
+         utc_offset,
+         is_dst
+        FROM pg_timezone_abbrevs() pg_timezone_abbrevs(abbrev, utc_offset, is_dst);
+        """), where);
     }
 
     /**
@@ -99,17 +106,17 @@ public class PgTimezoneAbbrevs extends TableImpl<PgTimezoneAbbrevsRecord> {
 
     @Override
     public PgTimezoneAbbrevs as(String alias) {
-        return new PgTimezoneAbbrevs(DSL.name(alias), this, parameters);
+        return new PgTimezoneAbbrevs(DSL.name(alias), this);
     }
 
     @Override
     public PgTimezoneAbbrevs as(Name alias) {
-        return new PgTimezoneAbbrevs(alias, this, parameters);
+        return new PgTimezoneAbbrevs(alias, this);
     }
 
     @Override
     public PgTimezoneAbbrevs as(Table<?> alias) {
-        return new PgTimezoneAbbrevs(alias.getQualifiedName(), this, parameters);
+        return new PgTimezoneAbbrevs(alias.getQualifiedName(), this);
     }
 
     /**
@@ -117,7 +124,7 @@ public class PgTimezoneAbbrevs extends TableImpl<PgTimezoneAbbrevsRecord> {
      */
     @Override
     public PgTimezoneAbbrevs rename(String name) {
-        return new PgTimezoneAbbrevs(DSL.name(name), null, parameters);
+        return new PgTimezoneAbbrevs(DSL.name(name), null);
     }
 
     /**
@@ -125,7 +132,7 @@ public class PgTimezoneAbbrevs extends TableImpl<PgTimezoneAbbrevsRecord> {
      */
     @Override
     public PgTimezoneAbbrevs rename(Name name) {
-        return new PgTimezoneAbbrevs(name, null, parameters);
+        return new PgTimezoneAbbrevs(name, null);
     }
 
     /**
@@ -133,15 +140,90 @@ public class PgTimezoneAbbrevs extends TableImpl<PgTimezoneAbbrevsRecord> {
      */
     @Override
     public PgTimezoneAbbrevs rename(Table<?> name) {
-        return new PgTimezoneAbbrevs(name.getQualifiedName(), null, parameters);
+        return new PgTimezoneAbbrevs(name.getQualifiedName(), null);
     }
 
     /**
-     * Call this table-valued function
+     * Create an inline derived table from this table
      */
-    public PgTimezoneAbbrevs call() {
-        PgTimezoneAbbrevs result = new PgTimezoneAbbrevs(DSL.name("pg_timezone_abbrevs"), null, new Field[] {});
+    @Override
+    public PgTimezoneAbbrevs where(Condition condition) {
+        return new PgTimezoneAbbrevs(getQualifiedName(), aliased() ? this : null, null, condition);
+    }
 
-        return aliased() ? result.as(getUnqualifiedName()) : result;
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgTimezoneAbbrevs where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgTimezoneAbbrevs where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgTimezoneAbbrevs where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgTimezoneAbbrevs where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgTimezoneAbbrevs where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgTimezoneAbbrevs where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgTimezoneAbbrevs where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgTimezoneAbbrevs whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgTimezoneAbbrevs whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

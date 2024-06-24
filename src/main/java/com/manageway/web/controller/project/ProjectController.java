@@ -6,6 +6,7 @@ import com.manageway.usecase.project.FindProjectUseCase;
 import com.manageway.web.controller.project.dtos.CreateProjectRequest;
 import com.manageway.web.controller.project.dtos.CreateProjectResponse;
 import com.manageway.web.controller.project.dtos.FindProjectResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,7 @@ public class ProjectController {
     }
 
     @PostMapping
-    public CreateProjectResponse create(@RequestBody CreateProjectRequest request) {
+    public CreateProjectResponse create(@RequestBody @Valid CreateProjectRequest request) {
         return createProjectUseCase.create(request);
     }
 

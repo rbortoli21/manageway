@@ -285,7 +285,6 @@ import com.manageway.generated.jooq.pg_catalog.tables.records.PgStatGetSlruRecor
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgStatGetSubscriptionRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgStatGetWalSendersRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgTablespaceDatabasesRecord;
-import com.manageway.generated.jooq.pg_catalog.tables.records.PgTimezoneAbbrevsRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgTimezoneNamesRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.RegexpMatchesRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.RegexpSplitToTableRecord;
@@ -3460,24 +3459,6 @@ public class Tables {
     public static final PgTimezoneAbbrevs PG_TIMEZONE_ABBREVS = PgTimezoneAbbrevs.PG_TIMEZONE_ABBREVS;
 
     /**
-     * Call <code>pg_catalog.pg_timezone_abbrevs</code>.
-     */
-    public static Result<PgTimezoneAbbrevsRecord> PG_TIMEZONE_ABBREVS(
-          Configuration configuration
-    ) {
-        return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.PgTimezoneAbbrevs.PG_TIMEZONE_ABBREVS.call(
-        )).fetch();
-    }
-
-    /**
-     * Get <code>pg_catalog.pg_timezone_abbrevs</code> as a table.
-     */
-    public static PgTimezoneAbbrevs PG_TIMEZONE_ABBREVS() {
-        return com.manageway.generated.jooq.pg_catalog.tables.PgTimezoneAbbrevs.PG_TIMEZONE_ABBREVS.call(
-        );
-    }
-
-    /**
      * The table <code>pg_catalog.pg_timezone_names</code>.
      */
     public static final PgTimezoneNames PG_TIMEZONE_NAMES = PgTimezoneNames.PG_TIMEZONE_NAMES;
@@ -3786,11 +3767,11 @@ public class Tables {
      */
     public static Result<TsParseRecord> TS_PARSE(
           Configuration configuration
-        , String parserName
+        , Long parserOid
         , String txt
     ) {
         return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.TsParse.TS_PARSE.call(
-              parserName
+              parserOid
             , txt
         )).fetch();
     }
@@ -3799,11 +3780,11 @@ public class Tables {
      * Get <code>pg_catalog.ts_parse</code> as a table.
      */
     public static TsParse TS_PARSE(
-          String parserName
+          Long parserOid
         , String txt
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.TsParse.TS_PARSE.call(
-            parserName,
+            parserOid,
             txt
         );
     }
@@ -3812,11 +3793,11 @@ public class Tables {
      * Get <code>pg_catalog.ts_parse</code> as a table.
      */
     public static TsParse TS_PARSE(
-          Field<String> parserName
+          Field<Long> parserOid
         , Field<String> txt
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.TsParse.TS_PARSE.call(
-            parserName,
+            parserOid,
             txt
         );
     }
@@ -3968,36 +3949,54 @@ public class Tables {
     public static final Unnest UNNEST = Unnest.UNNEST;
 
     /**
-     * Call <code>pg_catalog.unnest</code>.
+     * @deprecated Unknown data type. Parameter type or return type is unknown.
+     * If this is a qualified, user-defined type, it may have been excluded from
+     * code generation. If this is a built-in type, you can define an explicit
+     * {@link org.jooq.Binding} to specify how this type should be handled.
+     * Deprecation can be turned off using {@literal
+     * <deprecationOnUnknownTypes/>} in your code generator configuration.
      */
+    @Deprecated
     public static Result<UnnestRecord> UNNEST(
           Configuration configuration
-        , Object[] __1
+        , Object tsvector
     ) {
         return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.Unnest.UNNEST.call(
-              __1
+              tsvector
         )).fetch();
     }
 
     /**
-     * Get <code>pg_catalog.unnest</code> as a table.
+     * @deprecated Unknown data type. Parameter type or return type is unknown.
+     * If this is a qualified, user-defined type, it may have been excluded from
+     * code generation. If this is a built-in type, you can define an explicit
+     * {@link org.jooq.Binding} to specify how this type should be handled.
+     * Deprecation can be turned off using {@literal
+     * <deprecationOnUnknownTypes/>} in your code generator configuration.
      */
+    @Deprecated
     public static Unnest UNNEST(
-          Object[] __1
+          Object tsvector
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.Unnest.UNNEST.call(
-            __1
+            tsvector
         );
     }
 
     /**
-     * Get <code>pg_catalog.unnest</code> as a table.
+     * @deprecated Unknown data type. Parameter type or return type is unknown.
+     * If this is a qualified, user-defined type, it may have been excluded from
+     * code generation. If this is a built-in type, you can define an explicit
+     * {@link org.jooq.Binding} to specify how this type should be handled.
+     * Deprecation can be turned off using {@literal
+     * <deprecationOnUnknownTypes/>} in your code generator configuration.
      */
+    @Deprecated
     public static Unnest UNNEST(
-          Field<Object[]> __1
+          Field<Object> tsvector
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.Unnest.UNNEST.call(
-            __1
+            tsvector
         );
     }
 }

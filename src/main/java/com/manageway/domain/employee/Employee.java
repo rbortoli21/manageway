@@ -1,20 +1,17 @@
 package com.manageway.domain.employee;
 
 import com.manageway.domain.Id;
-import com.manageway.domain.person.Person;
-import org.springframework.expression.spel.ast.Identifier;
+import com.manageway.domain.user.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
-public class Employee extends Person {
+public class Employee extends User {
     private Double balance;
     private List<EmployeeCustomers> customers;
     private List<EmployeeProjects> projects;
-
-    @Override
-    public void refreshReferences() {
-
-    }
 
     public Employee() {
     }
@@ -51,5 +48,25 @@ public class Employee extends Person {
 
     public void setProjects(List<EmployeeProjects> projects) {
         this.projects = projects;
+    }
+
+    @Override
+    public void refreshReferences() {
+
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(super.getRole().name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return super._getPassword().value();
+    }
+
+    @Override
+    public String getUsername() {
+        return super._getUsername().value();
     }
 }

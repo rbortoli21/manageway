@@ -1,6 +1,6 @@
 package com.manageway.config;
 
-import com.manageway.web.filter.TenantIdVisitListener;
+import com.manageway.web.filter.TenantIdQueryFilter;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
@@ -26,7 +26,7 @@ public class JooqConfiguration {
         DefaultConfiguration configuration = new DefaultConfiguration();
         configuration.setSQLDialect(SQLDialect.POSTGRES);
         configuration.setDataSource(dataSource);
-        configuration.set(new DefaultVisitListenerProvider(new TenantIdVisitListener()));
+        configuration.set(new DefaultVisitListenerProvider(new TenantIdQueryFilter()));
         return DSL.using(configuration);
     }
 }

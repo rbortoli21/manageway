@@ -147,6 +147,48 @@ public class CustomerRecord extends UpdatableRecordImpl<CustomerRecord> {
         return (UUID) get(8);
     }
 
+    /**
+     * Setter for <code>public.customer.username</code>.
+     */
+    public void setUsername(String value) {
+        set(9, value);
+    }
+
+    /**
+     * Getter for <code>public.customer.username</code>.
+     */
+    public String getUsername() {
+        return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>public.customer.password</code>.
+     */
+    public void setPassword(String value) {
+        set(10, value);
+    }
+
+    /**
+     * Getter for <code>public.customer.password</code>.
+     */
+    public String getPassword() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>public.customer.role</code>.
+     */
+    public void setRole(String value) {
+        set(11, value);
+    }
+
+    /**
+     * Getter for <code>public.customer.role</code>.
+     */
+    public String getRole() {
+        return (String) get(11);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -170,7 +212,7 @@ public class CustomerRecord extends UpdatableRecordImpl<CustomerRecord> {
     /**
      * Create a detached, initialised CustomerRecord
      */
-    public CustomerRecord(UUID id, String name, String email, String phone, LocalDateTime birthDate, UUID addressId, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tenantId) {
+    public CustomerRecord(UUID id, String name, String email, String phone, LocalDateTime birthDate, UUID addressId, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tenantId, String username, String password, String role) {
         super(Customer.CUSTOMER);
 
         setId(id);
@@ -182,6 +224,9 @@ public class CustomerRecord extends UpdatableRecordImpl<CustomerRecord> {
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
         setTenantId(tenantId);
+        setUsername(username);
+        setPassword(password);
+        setRole(role);
         resetChangedOnNotNull();
     }
 }

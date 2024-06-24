@@ -114,6 +114,21 @@ public class Employee extends TableImpl<EmployeeRecord> {
      */
     public final TableField<EmployeeRecord, UUID> TENANT_ID = createField(DSL.name("tenant_id"), SQLDataType.UUID, this, "");
 
+    /**
+     * The column <code>public.employee.username</code>.
+     */
+    public final TableField<EmployeeRecord, String> USERNAME = createField(DSL.name("username"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>public.employee.password</code>.
+     */
+    public final TableField<EmployeeRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>public.employee.role</code>.
+     */
+    public final TableField<EmployeeRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+
     private Employee(Name alias, Table<EmployeeRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }

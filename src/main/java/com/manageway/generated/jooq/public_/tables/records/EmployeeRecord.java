@@ -162,6 +162,48 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> {
         return (UUID) get(9);
     }
 
+    /**
+     * Setter for <code>public.employee.username</code>.
+     */
+    public void setUsername(String value) {
+        set(10, value);
+    }
+
+    /**
+     * Getter for <code>public.employee.username</code>.
+     */
+    public String getUsername() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>public.employee.password</code>.
+     */
+    public void setPassword(String value) {
+        set(11, value);
+    }
+
+    /**
+     * Getter for <code>public.employee.password</code>.
+     */
+    public String getPassword() {
+        return (String) get(11);
+    }
+
+    /**
+     * Setter for <code>public.employee.role</code>.
+     */
+    public void setRole(String value) {
+        set(12, value);
+    }
+
+    /**
+     * Getter for <code>public.employee.role</code>.
+     */
+    public String getRole() {
+        return (String) get(12);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -185,7 +227,7 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> {
     /**
      * Create a detached, initialised EmployeeRecord
      */
-    public EmployeeRecord(UUID id, String name, String email, String phone, LocalDateTime birthDate, UUID addressId, BigDecimal balance, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tenantId) {
+    public EmployeeRecord(UUID id, String name, String email, String phone, LocalDateTime birthDate, UUID addressId, BigDecimal balance, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tenantId, String username, String password, String role) {
         super(Employee.EMPLOYEE);
 
         setId(id);
@@ -198,6 +240,9 @@ public class EmployeeRecord extends UpdatableRecordImpl<EmployeeRecord> {
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
         setTenantId(tenantId);
+        setUsername(username);
+        setPassword(password);
+        setRole(role);
         resetChangedOnNotNull();
     }
 }
