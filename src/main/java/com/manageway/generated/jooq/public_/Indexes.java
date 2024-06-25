@@ -10,6 +10,7 @@ import com.manageway.generated.jooq.public_.tables.Employee;
 import com.manageway.generated.jooq.public_.tables.EmployeeCustomers;
 import com.manageway.generated.jooq.public_.tables.EmployeeProjects;
 import com.manageway.generated.jooq.public_.tables.Project;
+import com.manageway.generated.jooq.public_.tables.Users;
 
 import org.jooq.Index;
 import org.jooq.OrderField;
@@ -33,4 +34,5 @@ public class Indexes {
     public static final Index IDX_EMPLOYEE_PROJECTS_TENANT_ID = Internal.createIndex(DSL.name("idx_employee_projects_tenant_id"), EmployeeProjects.EMPLOYEE_PROJECTS, new OrderField[] { EmployeeProjects.EMPLOYEE_PROJECTS.TENANT_ID }, false);
     public static final Index IDX_EMPLOYEE_TENANT_ID = Internal.createIndex(DSL.name("idx_employee_tenant_id"), Employee.EMPLOYEE, new OrderField[] { Employee.EMPLOYEE.TENANT_ID }, false);
     public static final Index IDX_PROJECT_TENANT_ID = Internal.createIndex(DSL.name("idx_project_tenant_id"), Project.PROJECT, new OrderField[] { Project.PROJECT.TENANT_ID }, false);
+    public static final Index IDX_USER_TENANT_ID = Internal.createIndex(DSL.name("idx_user_tenant_id"), Users.USERS, new OrderField[] { Users.USERS.TENANT_ID }, false);
 }

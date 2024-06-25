@@ -11,32 +11,21 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex) {
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ManagewayException.class)
     public ResponseEntity<ErrorResponse> handleManagewayException(ManagewayException ex) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getStatusCode(), ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(ex.getStatusCode().value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, ex.getStatusCode());
     }
 }
 
 
-record ErrorResponse(
-        HttpStatus statusCode,
-        String message
-) {
-    public ErrorResponse(HttpStatus statusCode, String message) {
-        this.statusCode = statusCode;
-        this.message = message;
-    }
-
-    public HttpStatus getStatusCode() {
-        return statusCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-}

@@ -57,7 +57,6 @@ public class TsStat extends TableImpl<TsStatRecord> {
 
     private TsStat(Name alias, Table<TsStatRecord> aliased) {
         this(alias, aliased, new Field[] {
-            DSL.val(null, SQLDataType.CLOB),
             DSL.val(null, SQLDataType.CLOB)
         });
     }
@@ -140,11 +139,9 @@ public class TsStat extends TableImpl<TsStatRecord> {
      */
     public TsStat call(
           String query
-        , String weights
     ) {
         TsStat result = new TsStat(DSL.name("ts_stat"), null, new Field[] {
-            DSL.val(query, SQLDataType.CLOB),
-            DSL.val(weights, SQLDataType.CLOB)
+            DSL.val(query, SQLDataType.CLOB)
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;
@@ -155,11 +152,9 @@ public class TsStat extends TableImpl<TsStatRecord> {
      */
     public TsStat call(
           Field<String> query
-        , Field<String> weights
     ) {
         TsStat result = new TsStat(DSL.name("ts_stat"), null, new Field[] {
-            query,
-            weights
+            query
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;

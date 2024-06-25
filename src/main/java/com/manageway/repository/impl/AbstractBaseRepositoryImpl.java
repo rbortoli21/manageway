@@ -1,12 +1,16 @@
 package com.manageway.repository.impl;
 
+import com.manageway.domain.ApplicationContext;
 import com.manageway.domain.Id;
 import com.manageway.domain.PersistenceEntity;
+import com.manageway.domain.TenantId;
 import com.manageway.repository.interfaces.BaseRepository;
 import org.jooq.DSLContext;
 import org.jooq.Table;
 import org.jooq.UpdatableRecord;
 import org.jooq.impl.DSL;
+
+import java.util.UUID;
 
 import static com.manageway.domain.Id.ID;
 
@@ -24,9 +28,18 @@ public class AbstractBaseRepositoryImpl<T extends PersistenceEntity>
 
     @Override
     public T save(T entity) {
-        UpdatableRecord<?> record = dslContext.newRecord(table, entity);
+        ApplicationContext applicationContext = ApplicationContext.getInstance();
+        TenantId tenantId = applicationContext.getTenantId();
 
-        record.insert();
+        if (tenantId == null) tenantId = new TenantId(UUID.randomUUID());
+        entity.setTenantId(tenantId);
+
+        var record = entity.toRecord();
+
+        dslContext.insertInto(table)
+                .set(record)
+                .returning()
+                .fetchOne();
 
         return entity;
     }

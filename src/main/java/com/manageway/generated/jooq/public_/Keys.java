@@ -10,12 +10,14 @@ import com.manageway.generated.jooq.public_.tables.Employee;
 import com.manageway.generated.jooq.public_.tables.EmployeeCustomers;
 import com.manageway.generated.jooq.public_.tables.EmployeeProjects;
 import com.manageway.generated.jooq.public_.tables.Project;
+import com.manageway.generated.jooq.public_.tables.Users;
 import com.manageway.generated.jooq.public_.tables.records.AddressRecord;
 import com.manageway.generated.jooq.public_.tables.records.CustomerRecord;
 import com.manageway.generated.jooq.public_.tables.records.EmployeeCustomersRecord;
 import com.manageway.generated.jooq.public_.tables.records.EmployeeProjectsRecord;
 import com.manageway.generated.jooq.public_.tables.records.EmployeeRecord;
 import com.manageway.generated.jooq.public_.tables.records.ProjectRecord;
+import com.manageway.generated.jooq.public_.tables.records.UsersRecord;
 
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
@@ -41,17 +43,19 @@ public class Keys {
     public static final UniqueKey<EmployeeCustomersRecord> EMPLOYEE_CUSTOMERS_PKEY = Internal.createUniqueKey(EmployeeCustomers.EMPLOYEE_CUSTOMERS, DSL.name("employee_customers_pkey"), new TableField[] { EmployeeCustomers.EMPLOYEE_CUSTOMERS.ID }, true);
     public static final UniqueKey<EmployeeProjectsRecord> EMPLOYEE_PROJECTS_PKEY = Internal.createUniqueKey(EmployeeProjects.EMPLOYEE_PROJECTS, DSL.name("employee_projects_pkey"), new TableField[] { EmployeeProjects.EMPLOYEE_PROJECTS.ID }, true);
     public static final UniqueKey<ProjectRecord> PROJECT_PKEY = Internal.createUniqueKey(Project.PROJECT, DSL.name("project_pkey"), new TableField[] { Project.PROJECT.ID }, true);
+    public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_pkey"), new TableField[] { Users.USERS.ID }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<CustomerRecord, AddressRecord> CUSTOMER__FK_CUSTOMER_ADDRESS = Internal.createForeignKey(Customer.CUSTOMER, DSL.name("fk_customer_address"), new TableField[] { Customer.CUSTOMER.ADDRESS_ID }, Keys.ADDRESS_PKEY, new TableField[] { Address.ADDRESS.ID }, true);
-    public static final ForeignKey<EmployeeRecord, AddressRecord> EMPLOYEE__FK_EMPLOYEE_ADDRESS = Internal.createForeignKey(Employee.EMPLOYEE, DSL.name("fk_employee_address"), new TableField[] { Employee.EMPLOYEE.ADDRESS_ID }, Keys.ADDRESS_PKEY, new TableField[] { Address.ADDRESS.ID }, true);
+    public static final ForeignKey<CustomerRecord, UsersRecord> CUSTOMER__FK_CUSTOMER_USER = Internal.createForeignKey(Customer.CUSTOMER, DSL.name("fk_customer_user"), new TableField[] { Customer.CUSTOMER.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
+    public static final ForeignKey<EmployeeRecord, UsersRecord> EMPLOYEE__FK_EMPLOYEE_USER = Internal.createForeignKey(Employee.EMPLOYEE, DSL.name("fk_employee_user"), new TableField[] { Employee.EMPLOYEE.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
     public static final ForeignKey<EmployeeCustomersRecord, CustomerRecord> EMPLOYEE_CUSTOMERS__FK_EMPLOYEE_CUSTOMERS_CUSTOMER = Internal.createForeignKey(EmployeeCustomers.EMPLOYEE_CUSTOMERS, DSL.name("fk_employee_customers_customer"), new TableField[] { EmployeeCustomers.EMPLOYEE_CUSTOMERS.CUSTOMER_ID }, Keys.CUSTOMER_PKEY, new TableField[] { Customer.CUSTOMER.ID }, true);
     public static final ForeignKey<EmployeeCustomersRecord, EmployeeRecord> EMPLOYEE_CUSTOMERS__FK_EMPLOYEE_CUSTOMERS_EMPLOYEE = Internal.createForeignKey(EmployeeCustomers.EMPLOYEE_CUSTOMERS, DSL.name("fk_employee_customers_employee"), new TableField[] { EmployeeCustomers.EMPLOYEE_CUSTOMERS.EMPLOYEE_ID }, Keys.EMPLOYEE_PKEY, new TableField[] { Employee.EMPLOYEE.ID }, true);
     public static final ForeignKey<EmployeeProjectsRecord, EmployeeRecord> EMPLOYEE_PROJECTS__FK_EMPLOYEE_PROJECTS_EMPLOYEE = Internal.createForeignKey(EmployeeProjects.EMPLOYEE_PROJECTS, DSL.name("fk_employee_projects_employee"), new TableField[] { EmployeeProjects.EMPLOYEE_PROJECTS.EMPLOYEE_ID }, Keys.EMPLOYEE_PKEY, new TableField[] { Employee.EMPLOYEE.ID }, true);
     public static final ForeignKey<EmployeeProjectsRecord, ProjectRecord> EMPLOYEE_PROJECTS__FK_EMPLOYEE_PROJECTS_PROJECT = Internal.createForeignKey(EmployeeProjects.EMPLOYEE_PROJECTS, DSL.name("fk_employee_projects_project"), new TableField[] { EmployeeProjects.EMPLOYEE_PROJECTS.PROJECT_ID }, Keys.PROJECT_PKEY, new TableField[] { Project.PROJECT.ID }, true);
     public static final ForeignKey<ProjectRecord, CustomerRecord> PROJECT__FK_PROJECT_CUSTOMER = Internal.createForeignKey(Project.PROJECT, DSL.name("fk_project_customer"), new TableField[] { Project.PROJECT.CUSTOMER_ID }, Keys.CUSTOMER_PKEY, new TableField[] { Customer.CUSTOMER.ID }, true);
     public static final ForeignKey<ProjectRecord, EmployeeRecord> PROJECT__FK_PROJECT_EMPLOYEE = Internal.createForeignKey(Project.PROJECT, DSL.name("fk_project_employee"), new TableField[] { Project.PROJECT.EMPLOYEE_ID }, Keys.EMPLOYEE_PKEY, new TableField[] { Employee.EMPLOYEE.ID }, true);
+    public static final ForeignKey<UsersRecord, AddressRecord> USERS__FK_USER_ADDRESS = Internal.createForeignKey(Users.USERS, DSL.name("fk_user_address"), new TableField[] { Users.USERS.ADDRESS_ID }, Keys.ADDRESS_PKEY, new TableField[] { Address.ADDRESS.ID }, true);
 }

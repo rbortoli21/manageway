@@ -1,5 +1,7 @@
 package com.manageway.domain;
 
+import java.util.UUID;
+
 public class ApplicationContext {
     private TenantId tenantId;
 
@@ -10,6 +12,8 @@ public class ApplicationContext {
     }
 
     public static ApplicationContext getInstance() {
+        if (threadLocal.get() == null)
+            threadLocal.set(new ApplicationContext(null));
         return threadLocal.get();
     }
 
@@ -25,6 +29,10 @@ public class ApplicationContext {
 
     public TenantId getTenantId() {
         return tenantId;
+    }
+
+    public UUID getTenantIdValue() {
+        return tenantId.value();
     }
 
     public void setTenantId(TenantId tenantId) {

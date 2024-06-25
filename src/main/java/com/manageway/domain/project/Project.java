@@ -3,6 +3,9 @@ package com.manageway.domain.project;
 import com.manageway.domain.PersistenceEntity;
 import com.manageway.domain.customer.Customer;
 import com.manageway.domain.employee.Employee;
+import com.manageway.generated.jooq.public_.tables.records.ProjectRecord;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Project extends PersistenceEntity {
@@ -12,11 +15,6 @@ public class Project extends PersistenceEntity {
     private Employee employee;
     private Customer customer;
     private Double totalPrice;
-
-    @Override
-    public void refreshReferences() {
-
-    }
 
     public Project() {
     }
@@ -76,5 +74,23 @@ public class Project extends PersistenceEntity {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public ProjectRecord toRecord() {
+        ProjectRecord record = new ProjectRecord();
+
+        record.setId(id.value());
+        record.setCreatedAt(createdAt);
+        record.setUpdatedAt(updatedAt);
+        record.setTenantId(tenantId.value());
+        record.setTitle(title);
+        record.setStartDate(startDate);
+        record.setEndDate(endDate);
+        record.setEmployeeId(employee.getId().value());
+        record.setCustomerId(customer.getId().value());
+        record.setTotalPrice(BigDecimal.valueOf(totalPrice));
+
+        return record;
     }
 }

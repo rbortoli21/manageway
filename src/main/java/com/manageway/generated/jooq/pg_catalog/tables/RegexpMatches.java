@@ -48,7 +48,6 @@ public class RegexpMatches extends TableImpl<RegexpMatchesRecord> {
     private RegexpMatches(Name alias, Table<RegexpMatchesRecord> aliased) {
         this(alias, aliased, new Field[] {
             DSL.val(null, SQLDataType.CLOB),
-            DSL.val(null, SQLDataType.CLOB),
             DSL.val(null, SQLDataType.CLOB)
         });
     }
@@ -132,12 +131,10 @@ public class RegexpMatches extends TableImpl<RegexpMatchesRecord> {
     public RegexpMatches call(
           String __1
         , String __2
-        , String __3
     ) {
         RegexpMatches result = new RegexpMatches(DSL.name("regexp_matches"), null, new Field[] {
             DSL.val(__1, SQLDataType.CLOB),
-            DSL.val(__2, SQLDataType.CLOB),
-            DSL.val(__3, SQLDataType.CLOB)
+            DSL.val(__2, SQLDataType.CLOB)
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;
@@ -149,12 +146,10 @@ public class RegexpMatches extends TableImpl<RegexpMatchesRecord> {
     public RegexpMatches call(
           Field<String> __1
         , Field<String> __2
-        , Field<String> __3
     ) {
         RegexpMatches result = new RegexpMatches(DSL.name("regexp_matches"), null, new Field[] {
             __1,
-            __2,
-            __3
+            __2
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;

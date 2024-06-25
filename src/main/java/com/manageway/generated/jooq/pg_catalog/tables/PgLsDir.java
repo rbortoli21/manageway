@@ -47,9 +47,7 @@ public class PgLsDir extends TableImpl<PgLsDirRecord> {
 
     private PgLsDir(Name alias, Table<PgLsDirRecord> aliased) {
         this(alias, aliased, new Field[] {
-            DSL.val(null, SQLDataType.CLOB),
-            DSL.val(null, SQLDataType.BOOLEAN),
-            DSL.val(null, SQLDataType.BOOLEAN)
+            DSL.val(null, SQLDataType.CLOB)
         });
     }
 
@@ -131,13 +129,9 @@ public class PgLsDir extends TableImpl<PgLsDirRecord> {
      */
     public PgLsDir call(
           String __1
-        , Boolean __2
-        , Boolean __3
     ) {
         PgLsDir result = new PgLsDir(DSL.name("pg_ls_dir"), null, new Field[] {
-            DSL.val(__1, SQLDataType.CLOB),
-            DSL.val(__2, SQLDataType.BOOLEAN),
-            DSL.val(__3, SQLDataType.BOOLEAN)
+            DSL.val(__1, SQLDataType.CLOB)
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;
@@ -148,13 +142,9 @@ public class PgLsDir extends TableImpl<PgLsDirRecord> {
      */
     public PgLsDir call(
           Field<String> __1
-        , Field<Boolean> __2
-        , Field<Boolean> __3
     ) {
         PgLsDir result = new PgLsDir(DSL.name("pg_ls_dir"), null, new Field[] {
-            __1,
-            __2,
-            __3
+            __1
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;

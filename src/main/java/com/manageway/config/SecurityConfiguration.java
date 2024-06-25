@@ -1,26 +1,67 @@
 package com.manageway.config;
 
 import com.manageway.usecase.user.FindUserUseCase;
+import com.manageway.web.filter.AuthFilter;
+import com.manageway.web.filter.util.AuthUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@EnableWebSecurity
+@EnableMethodSecurity
 @Configuration
 public class SecurityConfiguration {
-
     private final FindUserUseCase findUserUseCase;
+    private final AuthUtil authUtil;
 
-    public SecurityConfiguration(FindUserUseCase findUserUseCase) {
+    public SecurityConfiguration(FindUserUseCase findUserUseCase, AuthUtil authUtil) {
         this.findUserUseCase = findUserUseCase;
+        this.authUtil = authUtil;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/auth/**").permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
+                .exceptionHandling(exception ->
+                        exception.authenticationEntryPoint((request, response, authException) -> {
+                                    System.out.println(authException.getMessage());
+                                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                                }
+
+                        )
+                )
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    @Bean
+    public AuthFilter authFilter() {
+        return new AuthFilter(authUtil, userDetailsService());
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return findUserUseCase::findUserById;
+        return findUserUseCase::find;
     }
 
     @Bean
@@ -28,11 +69,11 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+//        authProvider.setUserDetailsService(userDetailsService());
+//        authProvider.setPasswordEncoder(passwordEncoder());
+//        return authProvider;
+//    }
 }

@@ -2,6 +2,7 @@ package com.manageway.domain.user;
 
 
 import com.manageway.domain.PersistenceEntity;
+import com.manageway.generated.jooq.public_.tables.records.AddressRecord;
 
 public class Address extends PersistenceEntity {
     private String street;
@@ -52,7 +53,17 @@ public class Address extends PersistenceEntity {
     }
 
     @Override
-    public void refreshReferences() {
+    public AddressRecord toRecord() {
+        AddressRecord record = new AddressRecord();
+        record.setId(id.value());
+        record.setStreet(street);
+        record.setCity(city);
+        record.setState(state);
+        record.setZipCode(zipCode);
+        record.setCreatedAt(createdAt);
+        record.setUpdatedAt(updatedAt);
+        record.setTenantId(tenantId.value());
 
+        return record;
     }
 }

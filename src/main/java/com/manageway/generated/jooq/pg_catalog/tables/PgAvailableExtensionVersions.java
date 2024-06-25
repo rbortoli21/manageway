@@ -7,10 +7,17 @@ package com.manageway.generated.jooq.pg_catalog.tables;
 import com.manageway.generated.jooq.pg_catalog.PgCatalog;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgAvailableExtensionVersionsRecord;
 
+import java.util.Collection;
+
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Name;
+import org.jooq.PlainSQL;
+import org.jooq.QueryPart;
+import org.jooq.SQL;
 import org.jooq.Schema;
+import org.jooq.Select;
+import org.jooq.Stringly;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -54,6 +61,12 @@ public class PgAvailableExtensionVersions extends TableImpl<PgAvailableExtension
 
     /**
      * The column
+     * <code>pg_catalog.pg_available_extension_versions.installed</code>.
+     */
+    public final TableField<PgAvailableExtensionVersionsRecord, Boolean> INSTALLED = createField(DSL.name("installed"), SQLDataType.BOOLEAN, this, "");
+
+    /**
+     * The column
      * <code>pg_catalog.pg_available_extension_versions.superuser</code>.
      */
     public final TableField<PgAvailableExtensionVersionsRecord, Boolean> SUPERUSER = createField(DSL.name("superuser"), SQLDataType.BOOLEAN, this, "");
@@ -89,16 +102,23 @@ public class PgAvailableExtensionVersions extends TableImpl<PgAvailableExtension
     public final TableField<PgAvailableExtensionVersionsRecord, String> COMMENT = createField(DSL.name("comment"), SQLDataType.CLOB, this, "");
 
     private PgAvailableExtensionVersions(Name alias, Table<PgAvailableExtensionVersionsRecord> aliased) {
-        this(alias, aliased, new Field[] {
-        });
-    }
-
-    private PgAvailableExtensionVersions(Name alias, Table<PgAvailableExtensionVersionsRecord> aliased, Field<?>[] parameters) {
-        this(alias, aliased, parameters, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
     private PgAvailableExtensionVersions(Name alias, Table<PgAvailableExtensionVersionsRecord> aliased, Field<?>[] parameters, Condition where) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.function(), where);
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
+        create view "pg_available_extension_versions" as  SELECT e.name,
+         e.version,
+         (x.extname IS NOT NULL) AS installed,
+         e.superuser,
+         e.trusted,
+         e.relocatable,
+         e.schema,
+         e.requires,
+         e.comment
+        FROM (pg_available_extension_versions() e(name, version, superuser, trusted, relocatable, schema, requires, comment)
+          LEFT JOIN pg_extension x ON (((e.name = x.extname) AND (e.version = x.extversion))));
+        """), where);
     }
 
     /**
@@ -132,17 +152,17 @@ public class PgAvailableExtensionVersions extends TableImpl<PgAvailableExtension
 
     @Override
     public PgAvailableExtensionVersions as(String alias) {
-        return new PgAvailableExtensionVersions(DSL.name(alias), this, parameters);
+        return new PgAvailableExtensionVersions(DSL.name(alias), this);
     }
 
     @Override
     public PgAvailableExtensionVersions as(Name alias) {
-        return new PgAvailableExtensionVersions(alias, this, parameters);
+        return new PgAvailableExtensionVersions(alias, this);
     }
 
     @Override
     public PgAvailableExtensionVersions as(Table<?> alias) {
-        return new PgAvailableExtensionVersions(alias.getQualifiedName(), this, parameters);
+        return new PgAvailableExtensionVersions(alias.getQualifiedName(), this);
     }
 
     /**
@@ -150,7 +170,7 @@ public class PgAvailableExtensionVersions extends TableImpl<PgAvailableExtension
      */
     @Override
     public PgAvailableExtensionVersions rename(String name) {
-        return new PgAvailableExtensionVersions(DSL.name(name), null, parameters);
+        return new PgAvailableExtensionVersions(DSL.name(name), null);
     }
 
     /**
@@ -158,7 +178,7 @@ public class PgAvailableExtensionVersions extends TableImpl<PgAvailableExtension
      */
     @Override
     public PgAvailableExtensionVersions rename(Name name) {
-        return new PgAvailableExtensionVersions(name, null, parameters);
+        return new PgAvailableExtensionVersions(name, null);
     }
 
     /**
@@ -166,15 +186,90 @@ public class PgAvailableExtensionVersions extends TableImpl<PgAvailableExtension
      */
     @Override
     public PgAvailableExtensionVersions rename(Table<?> name) {
-        return new PgAvailableExtensionVersions(name.getQualifiedName(), null, parameters);
+        return new PgAvailableExtensionVersions(name.getQualifiedName(), null);
     }
 
     /**
-     * Call this table-valued function
+     * Create an inline derived table from this table
      */
-    public PgAvailableExtensionVersions call() {
-        PgAvailableExtensionVersions result = new PgAvailableExtensionVersions(DSL.name("pg_available_extension_versions"), null, new Field[] {});
+    @Override
+    public PgAvailableExtensionVersions where(Condition condition) {
+        return new PgAvailableExtensionVersions(getQualifiedName(), aliased() ? this : null, null, condition);
+    }
 
-        return aliased() ? result.as(getUnqualifiedName()) : result;
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgAvailableExtensionVersions where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgAvailableExtensionVersions where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgAvailableExtensionVersions where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgAvailableExtensionVersions where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgAvailableExtensionVersions where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgAvailableExtensionVersions where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PgAvailableExtensionVersions where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgAvailableExtensionVersions whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PgAvailableExtensionVersions whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

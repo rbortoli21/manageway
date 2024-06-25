@@ -1,6 +1,8 @@
 package com.manageway.domain;
 
 
+import org.jooq.UpdatableRecord;
+
 import java.time.LocalDateTime;
 
 public abstract class PersistenceEntity {
@@ -8,8 +10,6 @@ public abstract class PersistenceEntity {
     protected LocalDateTime createdAt = LocalDateTime.now();
     protected LocalDateTime updatedAt = LocalDateTime.now();
     protected TenantId tenantId = new TenantId();
-
-    public abstract void refreshReferences();
 
     public Id getId() {
         return id;
@@ -42,4 +42,6 @@ public abstract class PersistenceEntity {
     public void setTenantId(TenantId tenantId) {
         this.tenantId = tenantId;
     }
+
+    public abstract UpdatableRecord<?> toRecord();
 }

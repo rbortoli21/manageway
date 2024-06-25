@@ -5,20 +5,25 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.function.Function;
 
+@Service
 public class AuthUtil {
     private static final String SECRET_KEY = "4125432A462D4A614E645267556B58703273357638792F423F4528472B4B6250";
 
-    public String generateToken(String username) {
-        return generateToken(username, new HashMap<>());
+    public String generateToken(String username, String tenantId) {
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("tenantId", tenantId);
+
+        return generateToken(username, claims);
     }
 
-    public String generateToken(String subject, HashMap<String, Object> claims) {
+    private String generateToken(String subject, HashMap<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
@@ -26,6 +31,10 @@ public class AuthUtil {
                 .setExpiration(null)
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
+    }
+
+    public String extractJwt(String header) {
+        return header.substring(7);
     }
 
     public boolean validateToken(String jwt, UserDetails userDetails) {
@@ -38,6 +47,10 @@ public class AuthUtil {
 
     public String extractUsername(String jwt) {
         return extractClaim(jwt, Claims::getSubject);
+    }
+
+    public String extractTenantId(String jwt) {
+        return extractClaim(jwt, claims -> claims.get("tenantId", String.class));
     }
 
     private <T> T extractClaim(String jwt, Function<Claims, T> claimsResolver) {

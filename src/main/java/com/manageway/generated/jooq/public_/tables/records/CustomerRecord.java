@@ -36,157 +36,59 @@ public class CustomerRecord extends UpdatableRecordImpl<CustomerRecord> {
     }
 
     /**
-     * Setter for <code>public.customer.name</code>.
+     * Setter for <code>public.customer.user_id</code>.
      */
-    public void setName(String value) {
+    public void setUserId(UUID value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.customer.name</code>.
+     * Getter for <code>public.customer.user_id</code>.
      */
-    public String getName() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>public.customer.email</code>.
-     */
-    public void setEmail(String value) {
-        set(2, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.email</code>.
-     */
-    public String getEmail() {
-        return (String) get(2);
-    }
-
-    /**
-     * Setter for <code>public.customer.phone</code>.
-     */
-    public void setPhone(String value) {
-        set(3, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.phone</code>.
-     */
-    public String getPhone() {
-        return (String) get(3);
-    }
-
-    /**
-     * Setter for <code>public.customer.birth_date</code>.
-     */
-    public void setBirthDate(LocalDateTime value) {
-        set(4, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.birth_date</code>.
-     */
-    public LocalDateTime getBirthDate() {
-        return (LocalDateTime) get(4);
-    }
-
-    /**
-     * Setter for <code>public.customer.address_id</code>.
-     */
-    public void setAddressId(UUID value) {
-        set(5, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.address_id</code>.
-     */
-    public UUID getAddressId() {
-        return (UUID) get(5);
+    public UUID getUserId() {
+        return (UUID) get(1);
     }
 
     /**
      * Setter for <code>public.customer.created_at</code>.
      */
     public void setCreatedAt(LocalDateTime value) {
-        set(6, value);
+        set(2, value);
     }
 
     /**
      * Getter for <code>public.customer.created_at</code>.
      */
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(6);
+        return (LocalDateTime) get(2);
     }
 
     /**
      * Setter for <code>public.customer.updated_at</code>.
      */
     public void setUpdatedAt(LocalDateTime value) {
-        set(7, value);
+        set(3, value);
     }
 
     /**
      * Getter for <code>public.customer.updated_at</code>.
      */
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(7);
+        return (LocalDateTime) get(3);
     }
 
     /**
      * Setter for <code>public.customer.tenant_id</code>.
      */
     public void setTenantId(UUID value) {
-        set(8, value);
+        set(4, value);
     }
 
     /**
      * Getter for <code>public.customer.tenant_id</code>.
      */
     public UUID getTenantId() {
-        return (UUID) get(8);
-    }
-
-    /**
-     * Setter for <code>public.customer.username</code>.
-     */
-    public void setUsername(String value) {
-        set(9, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.username</code>.
-     */
-    public String getUsername() {
-        return (String) get(9);
-    }
-
-    /**
-     * Setter for <code>public.customer.password</code>.
-     */
-    public void setPassword(String value) {
-        set(10, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.password</code>.
-     */
-    public String getPassword() {
-        return (String) get(10);
-    }
-
-    /**
-     * Setter for <code>public.customer.role</code>.
-     */
-    public void setRole(String value) {
-        set(11, value);
-    }
-
-    /**
-     * Getter for <code>public.customer.role</code>.
-     */
-    public String getRole() {
-        return (String) get(11);
+        return (UUID) get(4);
     }
 
     // -------------------------------------------------------------------------
@@ -212,21 +114,14 @@ public class CustomerRecord extends UpdatableRecordImpl<CustomerRecord> {
     /**
      * Create a detached, initialised CustomerRecord
      */
-    public CustomerRecord(UUID id, String name, String email, String phone, LocalDateTime birthDate, UUID addressId, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tenantId, String username, String password, String role) {
+    public CustomerRecord(UUID id, UUID userId, LocalDateTime createdAt, LocalDateTime updatedAt, UUID tenantId) {
         super(Customer.CUSTOMER);
 
         setId(id);
-        setName(name);
-        setEmail(email);
-        setPhone(phone);
-        setBirthDate(birthDate);
-        setAddressId(addressId);
+        setUserId(userId);
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
         setTenantId(tenantId);
-        setUsername(username);
-        setPassword(password);
-        setRole(role);
         resetChangedOnNotNull();
     }
 }

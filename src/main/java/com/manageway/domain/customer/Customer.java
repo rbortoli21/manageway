@@ -1,36 +1,35 @@
 package com.manageway.domain.customer;
 
 import com.manageway.domain.Id;
+import com.manageway.domain.PersistenceEntity;
 import com.manageway.domain.user.User;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.manageway.generated.jooq.public_.tables.records.CustomerRecord;
 
-import java.util.Collection;
-import java.util.List;
-
-public class Customer extends User {
+public class Customer extends PersistenceEntity {
+    private User user;
 
     public Customer(Id id) {
         this.id = id;
     }
 
-    @Override
-    public void refreshReferences() {
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(super.getRole().name()));
-    }
+    public CustomerRecord toRecord() {
+        CustomerRecord record = new CustomerRecord();
 
-    @Override
-    public String getUsername() {
-        return super._getUsername().value();
-    }
+        record.setId(id.value());
+        record.setUserId(user.getId().value());
+        record.setCreatedAt(createdAt);
+        record.setUpdatedAt(updatedAt);
+        record.setTenantId(tenantId.value());
 
-    @Override
-    public String getPassword() {
-        return super._getPassword().value();
+        return record;
     }
 }

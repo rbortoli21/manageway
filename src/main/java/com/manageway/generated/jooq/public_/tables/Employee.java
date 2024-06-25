@@ -7,10 +7,10 @@ package com.manageway.generated.jooq.public_.tables;
 import com.manageway.generated.jooq.public_.Indexes;
 import com.manageway.generated.jooq.public_.Keys;
 import com.manageway.generated.jooq.public_.Public;
-import com.manageway.generated.jooq.public_.tables.Address.AddressPath;
 import com.manageway.generated.jooq.public_.tables.EmployeeCustomers.EmployeeCustomersPath;
 import com.manageway.generated.jooq.public_.tables.EmployeeProjects.EmployeeProjectsPath;
 import com.manageway.generated.jooq.public_.tables.Project.ProjectPath;
+import com.manageway.generated.jooq.public_.tables.Users.UsersPath;
 import com.manageway.generated.jooq.public_.tables.records.EmployeeRecord;
 
 import java.math.BigDecimal;
@@ -70,29 +70,9 @@ public class Employee extends TableImpl<EmployeeRecord> {
     public final TableField<EmployeeRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>public.employee.name</code>.
+     * The column <code>public.employee.user_id</code>.
      */
-    public final TableField<EmployeeRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(60).nullable(false), this, "");
-
-    /**
-     * The column <code>public.employee.email</code>.
-     */
-    public final TableField<EmployeeRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.VARCHAR(255).nullable(false), this, "");
-
-    /**
-     * The column <code>public.employee.phone</code>.
-     */
-    public final TableField<EmployeeRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(20).nullable(false), this, "");
-
-    /**
-     * The column <code>public.employee.birth_date</code>.
-     */
-    public final TableField<EmployeeRecord, LocalDateTime> BIRTH_DATE = createField(DSL.name("birth_date"), SQLDataType.LOCALDATETIME(6), this, "");
-
-    /**
-     * The column <code>public.employee.address_id</code>.
-     */
-    public final TableField<EmployeeRecord, UUID> ADDRESS_ID = createField(DSL.name("address_id"), SQLDataType.UUID, this, "");
+    public final TableField<EmployeeRecord, UUID> USER_ID = createField(DSL.name("user_id"), SQLDataType.UUID, this, "");
 
     /**
      * The column <code>public.employee.balance</code>.
@@ -113,21 +93,6 @@ public class Employee extends TableImpl<EmployeeRecord> {
      * The column <code>public.employee.tenant_id</code>.
      */
     public final TableField<EmployeeRecord, UUID> TENANT_ID = createField(DSL.name("tenant_id"), SQLDataType.UUID, this, "");
-
-    /**
-     * The column <code>public.employee.username</code>.
-     */
-    public final TableField<EmployeeRecord, String> USERNAME = createField(DSL.name("username"), SQLDataType.VARCHAR(50).nullable(false), this, "");
-
-    /**
-     * The column <code>public.employee.password</code>.
-     */
-    public final TableField<EmployeeRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(255).nullable(false), this, "");
-
-    /**
-     * The column <code>public.employee.role</code>.
-     */
-    public final TableField<EmployeeRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     private Employee(Name alias, Table<EmployeeRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -208,19 +173,19 @@ public class Employee extends TableImpl<EmployeeRecord> {
 
     @Override
     public List<ForeignKey<EmployeeRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.EMPLOYEE__FK_EMPLOYEE_ADDRESS);
+        return Arrays.asList(Keys.EMPLOYEE__FK_EMPLOYEE_USER);
     }
 
-    private transient AddressPath _address;
+    private transient UsersPath _users;
 
     /**
-     * Get the implicit join path to the <code>public.address</code> table.
+     * Get the implicit join path to the <code>public.users</code> table.
      */
-    public AddressPath address() {
-        if (_address == null)
-            _address = new AddressPath(this, Keys.EMPLOYEE__FK_EMPLOYEE_ADDRESS, null);
+    public UsersPath users() {
+        if (_users == null)
+            _users = new UsersPath(this, Keys.EMPLOYEE__FK_EMPLOYEE_USER, null);
 
-        return _address;
+        return _users;
     }
 
     private transient EmployeeCustomersPath _employeeCustomers;

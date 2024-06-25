@@ -34,7 +34,7 @@ public class AuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        final String jwt = header.substring(7);
+        final String jwt = authUtil.extractJwt(header);
         if (!hasValidToken(jwt, response))
             return;
 

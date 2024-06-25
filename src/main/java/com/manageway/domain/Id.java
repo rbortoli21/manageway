@@ -14,8 +14,4 @@ public record Id(@JsonValue UUID value) {
     public Id {
         value = value == null ? UUID.randomUUID() : value;
     }
-
-    public UUID value() {
-        return value;
-    }
 }

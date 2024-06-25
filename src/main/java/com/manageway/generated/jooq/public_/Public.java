@@ -11,6 +11,7 @@ import com.manageway.generated.jooq.public_.tables.Employee;
 import com.manageway.generated.jooq.public_.tables.EmployeeCustomers;
 import com.manageway.generated.jooq.public_.tables.EmployeeProjects;
 import com.manageway.generated.jooq.public_.tables.Project;
+import com.manageway.generated.jooq.public_.tables.Users;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,6 +65,11 @@ public class Public extends SchemaImpl {
     public final Project PROJECT = Project.PROJECT;
 
     /**
+     * The table <code>public.users</code>.
+     */
+    public final Users USERS = Users.USERS;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -84,7 +90,8 @@ public class Public extends SchemaImpl {
             Employee.EMPLOYEE,
             EmployeeCustomers.EMPLOYEE_CUSTOMERS,
             EmployeeProjects.EMPLOYEE_PROJECTS,
-            Project.PROJECT
+            Project.PROJECT,
+            Users.USERS
         );
     }
 }

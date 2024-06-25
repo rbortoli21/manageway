@@ -237,7 +237,6 @@ import com.manageway.generated.jooq.pg_catalog.tables.records.JsonbPathQueryReco
 import com.manageway.generated.jooq.pg_catalog.tables.records.JsonbPathQueryTzRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.JsonbPopulateRecordsetRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.JsonbToRecordsetRecord;
-import com.manageway.generated.jooq.pg_catalog.tables.records.PgAvailableExtensionVersionsRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgConfigRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgCursorRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgEventTriggerDdlCommandsRecord;
@@ -286,6 +285,7 @@ import com.manageway.generated.jooq.pg_catalog.tables.records.PgStatGetSlruRecor
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgStatGetSubscriptionRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgStatGetWalSendersRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgTablespaceDatabasesRecord;
+import com.manageway.generated.jooq.pg_catalog.tables.records.PgTimezoneAbbrevsRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.PgTimezoneNamesRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.RegexpMatchesRecord;
 import com.manageway.generated.jooq.pg_catalog.tables.records.RegexpSplitToTableRecord;
@@ -1260,24 +1260,6 @@ public class PgCatalog extends SchemaImpl {
     public final PgAvailableExtensionVersions PG_AVAILABLE_EXTENSION_VERSIONS = PgAvailableExtensionVersions.PG_AVAILABLE_EXTENSION_VERSIONS;
 
     /**
-     * Call <code>pg_catalog.pg_available_extension_versions</code>.
-     */
-    public static Result<PgAvailableExtensionVersionsRecord> PG_AVAILABLE_EXTENSION_VERSIONS(
-          Configuration configuration
-    ) {
-        return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.PgAvailableExtensionVersions.PG_AVAILABLE_EXTENSION_VERSIONS.call(
-        )).fetch();
-    }
-
-    /**
-     * Get <code>pg_catalog.pg_available_extension_versions</code> as a table.
-     */
-    public static PgAvailableExtensionVersions PG_AVAILABLE_EXTENSION_VERSIONS() {
-        return com.manageway.generated.jooq.pg_catalog.tables.PgAvailableExtensionVersions.PG_AVAILABLE_EXTENSION_VERSIONS.call(
-        );
-    }
-
-    /**
      * The table <code>pg_catalog.pg_available_extensions</code>.
      */
     public final PgAvailableExtensions PG_AVAILABLE_EXTENSIONS = PgAvailableExtensions.PG_AVAILABLE_EXTENSIONS;
@@ -2195,13 +2177,9 @@ public class PgCatalog extends SchemaImpl {
     public static Result<PgLsDirRecord> PG_LS_DIR(
           Configuration configuration
         , String __1
-        , Boolean __2
-        , Boolean __3
     ) {
         return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.PgLsDir.PG_LS_DIR.call(
               __1
-            , __2
-            , __3
         )).fetch();
     }
 
@@ -2210,13 +2188,9 @@ public class PgCatalog extends SchemaImpl {
      */
     public static PgLsDir PG_LS_DIR(
           String __1
-        , Boolean __2
-        , Boolean __3
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.PgLsDir.PG_LS_DIR.call(
-            __1,
-            __2,
-            __3
+            __1
         );
     }
 
@@ -2225,13 +2199,9 @@ public class PgCatalog extends SchemaImpl {
      */
     public static PgLsDir PG_LS_DIR(
           Field<String> __1
-        , Field<Boolean> __2
-        , Field<Boolean> __3
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.PgLsDir.PG_LS_DIR.call(
-            __1,
-            __2,
-            __3
+            __1
         );
     }
 
@@ -3473,6 +3443,24 @@ public class PgCatalog extends SchemaImpl {
     public final PgTimezoneAbbrevs PG_TIMEZONE_ABBREVS = PgTimezoneAbbrevs.PG_TIMEZONE_ABBREVS;
 
     /**
+     * Call <code>pg_catalog.pg_timezone_abbrevs</code>.
+     */
+    public static Result<PgTimezoneAbbrevsRecord> PG_TIMEZONE_ABBREVS(
+          Configuration configuration
+    ) {
+        return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.PgTimezoneAbbrevs.PG_TIMEZONE_ABBREVS.call(
+        )).fetch();
+    }
+
+    /**
+     * Get <code>pg_catalog.pg_timezone_abbrevs</code> as a table.
+     */
+    public static PgTimezoneAbbrevs PG_TIMEZONE_ABBREVS() {
+        return com.manageway.generated.jooq.pg_catalog.tables.PgTimezoneAbbrevs.PG_TIMEZONE_ABBREVS.call(
+        );
+    }
+
+    /**
      * The table <code>pg_catalog.pg_timezone_names</code>.
      */
     public final PgTimezoneNames PG_TIMEZONE_NAMES = PgTimezoneNames.PG_TIMEZONE_NAMES;
@@ -3567,12 +3555,10 @@ public class PgCatalog extends SchemaImpl {
           Configuration configuration
         , String __1
         , String __2
-        , String __3
     ) {
         return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.RegexpMatches.REGEXP_MATCHES.call(
               __1
             , __2
-            , __3
         )).fetch();
     }
 
@@ -3582,12 +3568,10 @@ public class PgCatalog extends SchemaImpl {
     public static RegexpMatches REGEXP_MATCHES(
           String __1
         , String __2
-        , String __3
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.RegexpMatches.REGEXP_MATCHES.call(
             __1,
-            __2,
-            __3
+            __2
         );
     }
 
@@ -3597,12 +3581,10 @@ public class PgCatalog extends SchemaImpl {
     public static RegexpMatches REGEXP_MATCHES(
           Field<String> __1
         , Field<String> __2
-        , Field<String> __3
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.RegexpMatches.REGEXP_MATCHES.call(
             __1,
-            __2,
-            __3
+            __2
         );
     }
 
@@ -3781,11 +3763,11 @@ public class PgCatalog extends SchemaImpl {
      */
     public static Result<TsParseRecord> TS_PARSE(
           Configuration configuration
-        , Long parserOid
+        , String parserName
         , String txt
     ) {
         return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.TsParse.TS_PARSE.call(
-              parserOid
+              parserName
             , txt
         )).fetch();
     }
@@ -3794,11 +3776,11 @@ public class PgCatalog extends SchemaImpl {
      * Get <code>pg_catalog.ts_parse</code> as a table.
      */
     public static TsParse TS_PARSE(
-          Long parserOid
+          String parserName
         , String txt
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.TsParse.TS_PARSE.call(
-            parserOid,
+            parserName,
             txt
         );
     }
@@ -3807,11 +3789,11 @@ public class PgCatalog extends SchemaImpl {
      * Get <code>pg_catalog.ts_parse</code> as a table.
      */
     public static TsParse TS_PARSE(
-          Field<Long> parserOid
+          Field<String> parserName
         , Field<String> txt
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.TsParse.TS_PARSE.call(
-            parserOid,
+            parserName,
             txt
         );
     }
@@ -3827,11 +3809,9 @@ public class PgCatalog extends SchemaImpl {
     public static Result<TsStatRecord> TS_STAT(
           Configuration configuration
         , String query
-        , String weights
     ) {
         return configuration.dsl().selectFrom(com.manageway.generated.jooq.pg_catalog.tables.TsStat.TS_STAT.call(
               query
-            , weights
         )).fetch();
     }
 
@@ -3840,11 +3820,9 @@ public class PgCatalog extends SchemaImpl {
      */
     public static TsStat TS_STAT(
           String query
-        , String weights
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.TsStat.TS_STAT.call(
-            query,
-            weights
+            query
         );
     }
 
@@ -3853,11 +3831,9 @@ public class PgCatalog extends SchemaImpl {
      */
     public static TsStat TS_STAT(
           Field<String> query
-        , Field<String> weights
     ) {
         return com.manageway.generated.jooq.pg_catalog.tables.TsStat.TS_STAT.call(
-            query,
-            weights
+            query
         );
     }
 

@@ -10,6 +10,7 @@ import com.manageway.generated.jooq.public_.tables.Employee;
 import com.manageway.generated.jooq.public_.tables.EmployeeCustomers;
 import com.manageway.generated.jooq.public_.tables.EmployeeProjects;
 import com.manageway.generated.jooq.public_.tables.Project;
+import com.manageway.generated.jooq.public_.tables.Users;
 
 
 /**
@@ -47,4 +48,9 @@ public class Tables {
      * The table <code>public.project</code>.
      */
     public static final Project PROJECT = Project.PROJECT;
+
+    /**
+     * The table <code>public.users</code>.
+     */
+    public static final Users USERS = Users.USERS;
 }

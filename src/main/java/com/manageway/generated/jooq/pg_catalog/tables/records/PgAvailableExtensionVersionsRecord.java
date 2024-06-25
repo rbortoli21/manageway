@@ -49,10 +49,26 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
 
     /**
      * Setter for
+     * <code>pg_catalog.pg_available_extension_versions.installed</code>.
+     */
+    public void setInstalled(Boolean value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for
+     * <code>pg_catalog.pg_available_extension_versions.installed</code>.
+     */
+    public Boolean getInstalled() {
+        return (Boolean) get(2);
+    }
+
+    /**
+     * Setter for
      * <code>pg_catalog.pg_available_extension_versions.superuser</code>.
      */
     public void setSuperuser(Boolean value) {
-        set(2, value);
+        set(3, value);
     }
 
     /**
@@ -60,7 +76,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.superuser</code>.
      */
     public Boolean getSuperuser() {
-        return (Boolean) get(2);
+        return (Boolean) get(3);
     }
 
     /**
@@ -68,7 +84,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.trusted</code>.
      */
     public void setTrusted(Boolean value) {
-        set(3, value);
+        set(4, value);
     }
 
     /**
@@ -76,7 +92,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.trusted</code>.
      */
     public Boolean getTrusted() {
-        return (Boolean) get(3);
+        return (Boolean) get(4);
     }
 
     /**
@@ -84,7 +100,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.relocatable</code>.
      */
     public void setRelocatable(Boolean value) {
-        set(4, value);
+        set(5, value);
     }
 
     /**
@@ -92,7 +108,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.relocatable</code>.
      */
     public Boolean getRelocatable() {
-        return (Boolean) get(4);
+        return (Boolean) get(5);
     }
 
     /**
@@ -100,7 +116,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.schema</code>.
      */
     public void setSchema(String value) {
-        set(5, value);
+        set(6, value);
     }
 
     /**
@@ -108,7 +124,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.schema</code>.
      */
     public String getSchema() {
-        return (String) get(5);
+        return (String) get(6);
     }
 
     /**
@@ -116,7 +132,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.requires</code>.
      */
     public void setRequires(String[] value) {
-        set(6, value);
+        set(7, value);
     }
 
     /**
@@ -124,7 +140,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.requires</code>.
      */
     public String[] getRequires() {
-        return (String[]) get(6);
+        return (String[]) get(7);
     }
 
     /**
@@ -132,7 +148,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.comment</code>.
      */
     public void setComment(String value) {
-        set(7, value);
+        set(8, value);
     }
 
     /**
@@ -140,7 +156,7 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
      * <code>pg_catalog.pg_available_extension_versions.comment</code>.
      */
     public String getComment() {
-        return (String) get(7);
+        return (String) get(8);
     }
 
     // -------------------------------------------------------------------------
@@ -157,11 +173,12 @@ public class PgAvailableExtensionVersionsRecord extends TableRecordImpl<PgAvaila
     /**
      * Create a detached, initialised PgAvailableExtensionVersionsRecord
      */
-    public PgAvailableExtensionVersionsRecord(String name, String version, Boolean superuser, Boolean trusted, Boolean relocatable, String schema, String[] requires, String comment) {
+    public PgAvailableExtensionVersionsRecord(String name, String version, Boolean installed, Boolean superuser, Boolean trusted, Boolean relocatable, String schema, String[] requires, String comment) {
         super(PgAvailableExtensionVersions.PG_AVAILABLE_EXTENSION_VERSIONS);
 
         setName(name);
         setVersion(version);
+        setInstalled(installed);
         setSuperuser(superuser);
         setTrusted(trusted);
         setRelocatable(relocatable);

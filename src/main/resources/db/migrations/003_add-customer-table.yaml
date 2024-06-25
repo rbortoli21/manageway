@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: rafael-bortoli
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: tenant_id
+                  type: UUID
+
+  - changeSet:
+      id: 2
+      author: rafael-bortoli
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: customer
+            baseColumnNames: user_id
+            constraintName: fk_customer_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 3
+      author: rafael-bortoli
+      changes:
+        - createIndex:
+            indexName: idx_customer_tenant_id
+            tableName: customer
+            columns:
+              - column:
+                  name: tenant_id

@@ -7,8 +7,7 @@ package com.manageway.generated.jooq.public_.tables;
 import com.manageway.generated.jooq.public_.Indexes;
 import com.manageway.generated.jooq.public_.Keys;
 import com.manageway.generated.jooq.public_.Public;
-import com.manageway.generated.jooq.public_.tables.Customer.CustomerPath;
-import com.manageway.generated.jooq.public_.tables.Employee.EmployeePath;
+import com.manageway.generated.jooq.public_.tables.Users.UsersPath;
 import com.manageway.generated.jooq.public_.tables.records.AddressRecord;
 
 import java.time.LocalDateTime;
@@ -178,30 +177,16 @@ public class Address extends TableImpl<AddressRecord> {
         return Keys.ADDRESS_PKEY;
     }
 
-    private transient CustomerPath _customer;
+    private transient UsersPath _users;
 
     /**
-     * Get the implicit to-many join path to the <code>public.customer</code>
-     * table
+     * Get the implicit to-many join path to the <code>public.users</code> table
      */
-    public CustomerPath customer() {
-        if (_customer == null)
-            _customer = new CustomerPath(this, null, Keys.CUSTOMER__FK_CUSTOMER_ADDRESS.getInverseKey());
+    public UsersPath users() {
+        if (_users == null)
+            _users = new UsersPath(this, null, Keys.USERS__FK_USER_ADDRESS.getInverseKey());
 
-        return _customer;
-    }
-
-    private transient EmployeePath _employee;
-
-    /**
-     * Get the implicit to-many join path to the <code>public.employee</code>
-     * table
-     */
-    public EmployeePath employee() {
-        if (_employee == null)
-            _employee = new EmployeePath(this, null, Keys.EMPLOYEE__FK_EMPLOYEE_ADDRESS.getInverseKey());
-
-        return _employee;
+        return _users;
     }
 
     @Override
