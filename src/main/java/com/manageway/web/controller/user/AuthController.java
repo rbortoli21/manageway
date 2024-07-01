@@ -1,7 +1,10 @@
 package com.manageway.web.controller.user;
 
 import com.manageway.domain.user.User;
+import com.manageway.usecase.user.AuthenticateUserUseCase;
 import com.manageway.usecase.user.RegisterUserUseCase;
+import com.manageway.web.controller.user.dtos.AuthenticateUserRequest;
+import com.manageway.web.controller.user.dtos.AuthenticateUserResponse;
 import com.manageway.web.controller.user.dtos.RegisterUserRequest;
 import com.manageway.web.controller.user.dtos.RegisterUserResponse;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final RegisterUserUseCase registerUserUseCase;
+    private final AuthenticateUserUseCase authenticateUserUseCase;
 
-    public AuthController(RegisterUserUseCase registerUserUseCase) {
+    public AuthController(RegisterUserUseCase registerUserUseCase, AuthenticateUserUseCase authenticateUserUseCase) {
         this.registerUserUseCase = registerUserUseCase;
+        this.authenticateUserUseCase = authenticateUserUseCase;
+    }
+
+    @PostMapping("/authenticate")
+    public AuthenticateUserResponse authenticate(@RequestBody AuthenticateUserRequest request) {
+        return new AuthenticateUserResponse(authenticateUserUseCase.authenticate(request));
     }
 
     @PostMapping("/register")

@@ -1,5 +1,6 @@
 package com.manageway.web.filter.util;
 
+import com.manageway.domain.TenantId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,9 +17,9 @@ import java.util.function.Function;
 public class AuthUtil {
     private static final String SECRET_KEY = "4125432A462D4A614E645267556B58703273357638792F423F4528472B4B6250";
 
-    public String generateToken(String username, String tenantId) {
+    public String generateToken(String username, TenantId tenantId) {
         HashMap<String, Object> claims = new HashMap<>();
-        claims.put("tenantId", tenantId);
+        claims.put("tenantId", tenantId.stringValue());
 
         return generateToken(username, claims);
     }
@@ -40,7 +41,7 @@ public class AuthUtil {
     public boolean validateToken(String jwt, UserDetails userDetails) {
         String username = extractUsername(jwt);
         if (!username.isEmpty() && SecurityContextHolder.getContext().getAuthentication() == null) {
-            return !Objects.equals(userDetails.getUsername(), username);
+            return Objects.equals(userDetails.getUsername(), username);
         }
         return false;
     }

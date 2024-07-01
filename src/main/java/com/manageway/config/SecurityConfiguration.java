@@ -6,6 +6,8 @@ import com.manageway.web.filter.util.AuthUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,7 +43,7 @@ public class SecurityConfiguration {
                 .exceptionHandling(exception ->
                         exception.authenticationEntryPoint((request, response, authException) -> {
                                     System.out.println(authException.getMessage());
-                                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                                 }
 
                         )
@@ -61,7 +63,7 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return findUserUseCase::find;
+        return findUserUseCase::findByEmail;
     }
 
     @Bean
@@ -69,11 +71,8 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(userDetailsService());
-//        authProvider.setPasswordEncoder(passwordEncoder());
-//        return authProvider;
-//    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }

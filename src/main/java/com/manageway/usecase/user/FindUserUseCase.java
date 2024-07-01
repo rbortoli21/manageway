@@ -19,4 +19,9 @@ public class FindUserUseCase {
         Id userId = new Id(UUID.fromString(id));
         return userRepository.find(userId);
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }

@@ -14,4 +14,11 @@ public class UserRepositoryImpl extends AbstractBaseRepositoryImpl<User> impleme
     protected UserRepositoryImpl(DSLContext dslContext) {
         super(dslContext, USERS, User.class);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return dslContext.selectFrom(USERS)
+                .where(USERS.EMAIL.eq(email))
+                .fetchOneInto(User.class);
+    }
 }

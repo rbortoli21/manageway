@@ -13,6 +13,7 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
+        ex.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -45,6 +46,7 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(ManagewayException.class)
     public ResponseEntity<ErrorResponse> handleManagewayException(ManagewayException ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getStatusCode().value(), ex.getMessage());
+        ex.printStackTrace();
         return new ResponseEntity<>(errorResponse, ex.getStatusCode());
     }
 }
