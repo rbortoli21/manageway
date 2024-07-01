@@ -14,9 +14,6 @@ public class Employee extends PersistenceEntity {
     private List<EmployeeProjects> projects;
     private User user;
 
-    public Employee() {
-    }
-
     public Employee(Id id) {
         this.id = id;
     }
@@ -26,12 +23,6 @@ public class Employee extends PersistenceEntity {
         this.customers = customers;
         this.projects = projects;
         this.user = user;
-    }
-
-    public Employee(Double balance, List<EmployeeCustomers> customers, List<EmployeeProjects> projects) {
-        this.balance = balance;
-        this.customers = customers;
-        this.projects = projects;
     }
 
     public Double getBalance() {

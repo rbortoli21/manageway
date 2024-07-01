@@ -8,6 +8,11 @@ import com.manageway.generated.jooq.public_.tables.records.CustomerRecord;
 public class Customer extends PersistenceEntity {
     private User user;
 
+
+    public Customer(User user) {
+        this.user = user;
+    }
+
     public Customer(Id id) {
         this.id = id;
     }

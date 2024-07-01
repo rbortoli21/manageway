@@ -23,7 +23,7 @@ public class RegisterUserUseCase {
     public User register(RegisterUserRequest request) {
         User user = request.toUser();
 
-        String passwordEncrypted = passwordEncoder.encode(request.password());
+        String passwordEncrypted = passwordEncoder.encode(request.getPassword());
         Password password = new Password(passwordEncrypted);
         user.setPassword(password);
 
