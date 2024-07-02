@@ -18,6 +18,7 @@ public class CreateEmployeeUseCase {
 
     public void createFromUser(User user) {
         Employee employee = new Employee(0.0, new ArrayList<>(), new ArrayList<>(), user);
+        employee.setTenantId(user.getTenantId());
         employeeRepository.save(employee);
     }
 }

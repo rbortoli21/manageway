@@ -7,6 +7,7 @@ import com.manageway.generated.jooq.public_.tables.records.EmployeeRecord;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 public class Employee extends PersistenceEntity {
     private Double balance;
@@ -14,14 +15,16 @@ public class Employee extends PersistenceEntity {
     private List<EmployeeProjects> projects;
     private User user;
 
-    public Employee(Id id) {
-        this.id = id;
-    }
-
     public Employee(Double balance, List<EmployeeCustomers> customers, List<EmployeeProjects> projects, User user) {
         this.balance = balance;
         this.customers = customers;
         this.projects = projects;
+        this.user = user;
+    }
+
+    public Employee(UUID id, BigDecimal balance, User user) {
+        this.id = new Id(id);
+        this.balance = balance;
         this.user = user;
     }
 

@@ -31,8 +31,8 @@ public class CreateProjectUseCase {
     public CreateProjectResponse create(CreateProjectRequest request) {
         Project project = request.toProject();
 
-        project.setCustomer(findCustomerUseCase.find(request.customerId()));
-        project.setEmployee(findEmployeeUseCase.find(request.employeeId()));
+        project.setCustomer(findCustomerUseCase.find(request.getCustomerId()));
+        project.setEmployee(findEmployeeUseCase.find(request.getEmployeeId()));
 
         String notFoundMessage = "{0} was not found in the database.";
         Optional.ofNullable(project.getEmployee()).orElseThrow(

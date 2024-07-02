@@ -16,6 +16,8 @@ public class CreateCustomerUseCase {
 
     public void createFromUser(User user) {
         Customer customer = new Customer(user);
+        customer.setTenantId(user.getTenantId());
+
         customerRepository.save(customer);
     }
 }

@@ -24,7 +24,8 @@ public class ContextFilter implements HandlerInterceptor {
         if (header == null || !header.startsWith("Bearer "))
             return true;
 
-        String tenantId = authUtil.extractTenantId(header);
+        String jwt = authUtil.extractJwt(header);
+        String tenantId = authUtil.extractTenantId(jwt);
         if (tenantId != null)
             ApplicationContext.setInstance(new ApplicationContext(new TenantId(UUID.fromString(tenantId))));
 

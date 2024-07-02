@@ -3,7 +3,17 @@ package com.manageway.domain.user;
 import com.manageway.web.exception.ManagewayValidationException;
 
 public enum Role {
-    ADMIN, EMPLOYEE, CUSTOMER;
+    ADMIN("Admin"), EMPLOYEE("Employee"), CUSTOMER("Customer");
+
+    private final String title;
+
+    Role(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 
     public static Role byName(String role) {
         try {

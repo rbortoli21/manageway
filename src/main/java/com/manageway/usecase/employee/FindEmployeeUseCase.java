@@ -21,6 +21,6 @@ public class FindEmployeeUseCase {
         if (employee.getId() == null) {
             return null;
         }
-        return employeeRepository.find(employee.getId());
+        return find(employee.getId());
     }
 }

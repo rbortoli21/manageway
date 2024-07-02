@@ -1,6 +1,7 @@
 package com.manageway.domain;
 
 
+import io.jsonwebtoken.lang.Assert;
 import org.jooq.UpdatableRecord;
 
 import java.time.LocalDateTime;
@@ -44,4 +45,9 @@ public abstract class PersistenceEntity {
     }
 
     public abstract UpdatableRecord<?> toRecord();
+
+    public void validate() {
+        Assert.notNull(id, "Id cannot be null");
+        Assert.notNull(tenantId, "TenantId cannot be null");
+    }
 }
