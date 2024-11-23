@@ -1,5 +1,7 @@
 package com.manageway.domain;
 
+import com.manageway.domain.entity.TenantId;
+
 import java.util.UUID;
 
 public class ApplicationContext {

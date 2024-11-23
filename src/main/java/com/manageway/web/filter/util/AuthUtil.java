@@ -1,6 +1,6 @@
 package com.manageway.web.filter.util;
 
-import com.manageway.domain.TenantId;
+import com.manageway.domain.entity.TenantId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

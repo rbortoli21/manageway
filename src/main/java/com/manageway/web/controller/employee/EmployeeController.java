@@ -1,7 +1,7 @@
 package com.manageway.web.controller.employee;
 
-import com.manageway.domain.Id;
-import com.manageway.usecase.employee.FindEmployeeUseCase;
+import com.manageway.domain.entity.Id;
+import com.manageway.application.usecase.employee.FindEmployeeUseCase;
 import com.manageway.web.controller.employee.dtos.FindEmployeeResponse;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.GetMapping;

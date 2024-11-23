@@ -1,10 +1,7 @@
 package com.manageway.web.controller.user.dtos;
 
-import com.manageway.domain.user.Role;
-import com.manageway.domain.user.User;
-import com.manageway.domain.user.records.Email;
-import com.manageway.domain.user.records.Name;
-import com.manageway.domain.user.records.Password;
+import com.manageway.domain.entity.user.Role;
+import com.manageway.domain.entity.user.User;
 import org.springframework.util.Assert;
 
 public class RegisterUserRequest {
@@ -21,15 +18,13 @@ public class RegisterUserRequest {
         validateFields();
     }
 
-    public User toUser() {
-        User user = new User();
-
-        user.setName(new Name(name));
-        user.setEmail(new Email(email));
-        user.setPassword(new Password(password));
-        user.setRole(Role.byName(role));
-
-        return user;
+    public User toUser(String passwordEncrypted) {
+        return new User.UserBuilder()
+                .withName(this.name)
+                .withEmail(this.email)
+                .withPassword(passwordEncrypted)
+                .withRole(Role.byName(this.role))
+                .build();
     }
 
     public void validateFields() {

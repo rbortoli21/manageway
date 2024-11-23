@@ -1,8 +1,8 @@
 package com.manageway.web.controller.project.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.manageway.domain.Id;
-import com.manageway.domain.project.Project;
+import com.manageway.domain.entity.Id;
+import com.manageway.domain.entity.project.Project;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
@@ -21,14 +21,12 @@ public class CreateProjectRequest {
     private Double totalPrice;
 
     public Project toProject() {
-        Project project = new Project();
-
-        project.setTitle(title);
-        project.setStartDate(startDate);
-        project.setEndDate(endDate);
-        project.setTotalPrice(totalPrice);
-
-        return project;
+        return new Project.ProjectBuilder()
+                .withTitle(title)
+                .withStartDate(startDate)
+                .withEndDate(endDate)
+                .withTotalPrice(totalPrice)
+                .build();
     }
 
     public String getTitle() {

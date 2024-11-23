@@ -1,7 +1,7 @@
 package com.manageway.web.filter;
 
 import com.manageway.domain.ApplicationContext;
-import com.manageway.domain.TenantId;
+import com.manageway.domain.entity.TenantId;
 import com.manageway.web.filter.util.AuthUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,7 +1,7 @@
 package com.manageway.web.controller.employee.dtos;
 
-import com.manageway.domain.employee.Employee;
-import com.manageway.domain.user.User;
+import com.manageway.domain.entity.employee.Employee;
+import com.manageway.domain.entity.user.User;
 
 public record FindEmployeeResponse(
         String name,

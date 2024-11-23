@@ -1,6 +1,6 @@
 package com.manageway.web.controller.project.dtos;
 
-import com.manageway.domain.project.Project;
+import com.manageway.domain.entity.project.Project;
 
 public class CreateProjectResponse {
     private Boolean success;

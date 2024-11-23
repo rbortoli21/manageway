@@ -1,6 +1,6 @@
 package com.manageway.web.converter;
 
-import com.manageway.domain.user.records.Email;
+import com.manageway.domain.entity.user.records.Email;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;

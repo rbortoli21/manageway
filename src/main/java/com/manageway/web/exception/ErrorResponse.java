@@ -1,6 +1,6 @@
 package com.manageway.web.exception;
 
-record ErrorResponse(
+public record ErrorResponse(
         Integer statusCode,
         String message
 ) {
