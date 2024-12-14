@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 @Service
 public class AuthUtil {
-    private static final String SECRET_KEY = "3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
+    private static final String SECRET_KEY = System.getenv("SECRET_KEY");
 
     public String generateToken(String username, TenantId tenantId) {
         HashMap<String, Object> claims = new HashMap<>();
